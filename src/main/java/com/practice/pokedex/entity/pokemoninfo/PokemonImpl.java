@@ -13,21 +13,22 @@ public class PokemonImpl implements Pokemon{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false, unique = true)
     private Integer pokemonId;
 
-    @Column(name = "NAME", nullable = false, unique = true)
+    @Column(name = "pokemonName", nullable = false, unique = true)
     private String pokemonName;
 
-    @Column(name = "TYPE", nullable = false)
+    @Column(name = "pokemonType", nullable = true)
     private String pokemonType;
 
-    @Column(name = "NATURE", nullable = false)
+    @Column(name = "pokemonNature", nullable = true)
     private String pokemonNature;
 
-    @Column(name = "TYPE", nullable = false, unique = true)
+    @Column(name = "indexNumber", nullable = false, unique = true)
     private Integer pokemonIndexNumber;
 
-    @Column(name = "DATE", nullable = false)
+    @Column(name = "dateSeen", nullable = true)
     @JsonFormat(pattern = "yyyy-mm-dd", timezone = "CST")
     private Date pokemonDateAdded;
 
