@@ -1,5 +1,8 @@
 package com.practice.pokedex.entity.pokemoninfo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.beans.BeanUtils;
+
 import java.sql.Date;
 
 public class PokemonView implements Pokemon{
@@ -9,53 +12,82 @@ public class PokemonView implements Pokemon{
     private String pokemonType;
     private String pokemonNature;
     private Integer pokemonIndexNumber;
+    @JsonFormat(pattern = "yyyy-mm-dd", timezone = "CST")
     private Date pokemonDateAdded;
 
-    public Integer getPokemonId() {
-        return pokemonId;
+    public PokemonView(PokemonImpl pokemonImpl) {
+        BeanUtils.copyProperties(pokemonImpl, this, Pokemon.class);
     }
 
-    public void setPokemonId(Integer pokemonId) {
+    public PokemonView() {
+        //default
+    }
+    public PokemonView(Integer pokemonId, String pokemonName, String pokemonType, String pokemonNature, Integer pokemonIndexNumber, Date pokemonDateAdded) {
         this.pokemonId = pokemonId;
-    }
-
-    public String getPokemonName() {
-        return pokemonName;
-    }
-
-    public void setPokemonName(String pokemonName) {
         this.pokemonName = pokemonName;
-    }
-
-    public String getPokemonType() {
-        return pokemonType;
-    }
-
-    public void setPokemonType(String pokemonType) {
         this.pokemonType = pokemonType;
-    }
-
-    public String getPokemonNature() {
-        return pokemonNature;
-    }
-
-    public void setPokemonNature(String pokemonNature) {
         this.pokemonNature = pokemonNature;
-    }
-
-    public Integer getPokemonIndexNumber() {
-        return pokemonIndexNumber;
-    }
-
-    public void setPokemonIndexNumber(Integer pokemonIndexNumber) {
         this.pokemonIndexNumber = pokemonIndexNumber;
-    }
-
-    public Date getPokemonDateAdded() {
-        return pokemonDateAdded;
-    }
-
-    public void setPokemonDateAdded(Date pokemonDateAdded) {
         this.pokemonDateAdded = pokemonDateAdded;
+    }
+
+    @Override
+    public Integer getpokemonId() {
+        return null;
+    }
+
+    @Override
+    public void setpokemonId(Integer pokemonId) {
+
+    }
+
+    @Override
+    public String getpokemonName() {
+        return null;
+    }
+
+    @Override
+    public void setpokemonName(String pokemonName) {
+
+    }
+
+    @Override
+    public String getpokemonType() {
+        return null;
+    }
+
+    @Override
+    public void setpokemonType(String pokemonType) {
+
+    }
+
+    @Override
+    public String getpokemonNature() {
+        return null;
+    }
+
+    @Override
+    public void setpokemonNature(String pokemonNature) {
+
+    }
+
+    @Override
+    public Integer getpokemonIndexNumber() {
+        return null;
+    }
+
+    @Override
+    public void setpokemonIndexNumber(Integer pokemonIndexNumber) {
+
+    }
+
+    @Override
+    public Date getpokemonDateAdded() {
+        return null;
+    }
+
+    @Override
+    public void setpokemonDateAdded(Date pokemonDateAdded) {
+
     }
 }

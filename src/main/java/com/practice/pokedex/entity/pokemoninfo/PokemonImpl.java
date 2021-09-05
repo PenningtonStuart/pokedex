@@ -2,6 +2,8 @@ package com.practice.pokedex.entity.pokemoninfo;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.beans.BeanUtils;
+
 import javax.persistence.*;
 import java.sql.Date;
 
@@ -29,9 +31,9 @@ public class PokemonImpl implements Pokemon{
     @JsonFormat(pattern = "yyyy-mm-dd", timezone = "CST")
     private Date pokemonDateAdded;
 
-//    public PokemonImpl(PokemonView pokemonView){
-//        beanUtils.copyProperties(pokemonView, this, Pokemon.class);
-//    }
+    public PokemonImpl(PokemonView pokemonView){
+        BeanUtils.copyProperties(pokemonView, this, Pokemon.class);
+    }
 
     public PokemonImpl() {
         super();
@@ -46,111 +48,63 @@ public class PokemonImpl implements Pokemon{
         this.pokemonDateAdded = pokemonDateAdded;
     }
 
-    public Integer getPokemonId() {
-        return pokemonId;
-    }
-
-    public void setPokemonId(Integer pokemonId) {
-        this.pokemonId = pokemonId;
-    }
-
-    public String getPokemonName() {
-        return pokemonName;
-    }
-
-    public void setPokemonName(String pokemonName) {
-        this.pokemonName = pokemonName;
-    }
-
-    public String getPokemonType() {
-        return pokemonType;
-    }
-
-    public void setPokemonType(String pokemonType) {
-        this.pokemonType = pokemonType;
-    }
-
-    public String getPokemonNature() {
-        return pokemonNature;
-    }
-
-    public void setPokemonNature(String pokemonNature) {
-        this.pokemonNature = pokemonNature;
-    }
-
-    public Integer getPokemonIndexNumber() {
-        return pokemonIndexNumber;
-    }
-
-    public void setPokemonIndexNumber(Integer pokemonIndexNumber) {
-        this.pokemonIndexNumber = pokemonIndexNumber;
-    }
-
-    public Date getPokemonDateAdded() {
-        return pokemonDateAdded;
-    }
-
-    public void setPokemonDateAdded(Date pokemonDateAdded) {
-        this.pokemonDateAdded = pokemonDateAdded;
-    }
-
     @Override
     public Integer getpokemonId() {
-        return null;
+        return pokemonId;
     }
 
     @Override
     public void setpokemonId(Integer pokemonId) {
-
+        this.pokemonId = pokemonId;
     }
 
     @Override
     public String getpokemonName() {
-        return null;
+        return pokemonName;
     }
 
     @Override
     public void setpokemonName(String pokemonName) {
-
+        this.pokemonName = pokemonName;
     }
 
     @Override
     public String getpokemonType() {
-        return null;
+        return pokemonType;
     }
 
     @Override
     public void setpokemonType(String pokemonType) {
-
+        this.pokemonType = pokemonType;
     }
 
     @Override
     public String getpokemonNature() {
-        return null;
+        return pokemonNature;
     }
 
     @Override
     public void setpokemonNature(String pokemonNature) {
-
+        this.pokemonNature = pokemonNature;
     }
 
     @Override
     public Integer getpokemonIndexNumber() {
-        return null;
+        return pokemonIndexNumber;
     }
 
     @Override
     public void setpokemonIndexNumber(Integer pokemonIndexNumber) {
-
+        this.pokemonIndexNumber = pokemonIndexNumber;
     }
 
     @Override
     public Date getpokemonDateAdded() {
-        return null;
+        return pokemonDateAdded;
     }
 
     @Override
     public void setpokemonDateAdded(Date pokemonDateAdded) {
-
+        this.pokemonDateAdded = pokemonDateAdded;
     }
 }
