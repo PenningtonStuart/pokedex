@@ -1,42 +1,57 @@
 package com.practice.pokedex.controller;
 
-import com.practice.pokedex.entity.pokemoninfo.PokemonView;
+import com.practice.pokedex.model.PokemonImpl;
+import com.practice.pokedex.repository.PokemonRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping(value = "/pokemon")
+@CrossOrigin(origins = "http://localhost:8080")
 @RestController
-
+@RequestMapping("/api")
 public class PokemonController {
 
-    @GetMapping(value = "/all")
-    public ResponseEntity<List<PokemonView>> getAllPokemon() {
-        //return all Pokemon
+    @Autowired
+    PokemonRepo pokemonRepo;
+
+    @GetMapping("/pokemoninfo")
+    public ResponseEntity<List<PokemonImpl>> getAllPokemon(){
+        List<PokemonImpl> pokemonList = pokemonRepo.findAll();
+        //TODO add handling for error cases
+        System.out.println(pokemonList);
+        return new ResponseEntity<>(pokemonList, HttpStatus.OK);
+    }
+
+    @GetMapping("/pokemoninfo/{id}")
+    public ResponseEntity<PokemonImpl> getPokemonById(@PathVariable("id") long id) {
         return null;
     }
 
-    @GetMapping(value = "/{indexNumber}")
-    public ResponseEntity<List<PokemonView>> getAllByIndexNumber() {
-        //return all by index number
+    @PostMapping("/pokemoninfo")
+    public ResponseEntity<PokemonImpl> createPokemon(@RequestBody PokemonImpl pokemonImpl) {
         return null;
     }
 
-    @GetMapping(value = "/{name}")
-    public ResponseEntity<List<PokemonView>> getAllByName() {
-        //return all by index number
+    @PutMapping("/pokemoninfo/{id}")
+    public ResponseEntity<PokemonImpl> updatePokemon(@PathVariable("id") long id, @RequestBody PokemonImpl pokemonImpl) {
         return null;
     }
 
-    @PostMapping(value = "/create")
-    public ResponseEntity<PokemonView> createPokemonEntry(@RequestBody PokemonView pokemon) {
-        Integer entryId = pokemon.getpokemonId();
-        if(entryId != null) {
-            return new ResponseEntity<>(HttpStatus.CONFLICT);
-        }
-        //add in manager.save function PokemonView pkView = pokemonManager.savePokemon(pokemon)
-        return new ResponseEntity<>(entryId, HttpStatus.CONFLICT);
+    @DeleteMapping("/pokemoninfo/{id}")
+    public ResponseEntity<HttpStatus> deletePokemon(@PathVariable("id") long id) {
+        return null;
+    }
+
+    @DeleteMapping("/pokemoninfo")
+    public ResponseEntity<HttpStatus> deleteAllPokemon(){
+        return null;
+    }
+
+    @GetMapping("pokemoninfo/indexNumber")
+    public ResponseEntity<List<PokemonImpl>> findByPokemonNumber() {
+        return null;
     }
 }
