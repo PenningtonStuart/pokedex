@@ -1,17 +1,21 @@
 package com.practice.pokedex.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})//this is to prevent he Java runtime race condition for getbyID()
 @Table(name = "pokemon_info")
 public class PokemonImpl{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false, unique = true)
-    private long pokemonId;
+    private Integer pokemonId;
 
     @Column(name = "pokemon_name", nullable = false, unique = true)
     private String pokemonName;
@@ -29,7 +33,7 @@ public class PokemonImpl{
     @JsonFormat(pattern = "yyyy-mm-dd", timezone = "CST")
     private Date pokemonDateAdded;
 
-    public PokemonImpl(long pokemonId, String pokemonName, String pokemonType, String pokemonNature, Integer pokemonIndexNumber, Date pokemonDateAdded) {
+    public PokemonImpl(Integer pokemonId, String pokemonName, String pokemonType, String pokemonNature, Integer pokemonIndexNumber, Date pokemonDateAdded) {
         super();
         this.pokemonId = pokemonId;
         this.pokemonName = pokemonName;
@@ -43,11 +47,11 @@ public class PokemonImpl{
         //defalut
     }
 
-    public long getPokemonId() {
+    public Integer getPokemonId() {
         return pokemonId;
     }
 
-    public void setPokemonId(long pokemonId) {
+    public void setPokemonId(Integer pokemonId) {
         this.pokemonId = pokemonId;
     }
 

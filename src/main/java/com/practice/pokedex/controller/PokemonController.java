@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.Id;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:8080")
@@ -20,14 +21,23 @@ public class PokemonController {
     @GetMapping("/pokemoninfo")
     public ResponseEntity<List<PokemonImpl>> getAllPokemon(){
         List<PokemonImpl> pokemonList = pokemonRepo.findAll();
-        //TODO add handling for error cases
-        System.out.println(pokemonList);
+
+        if(pokemonList.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+
         return new ResponseEntity<>(pokemonList, HttpStatus.OK);
     }
 
     @GetMapping("/pokemoninfo/{id}")
-    public ResponseEntity<PokemonImpl> getPokemonById(@PathVariable("id") long id) {
-        return null;
+    public ResponseEntity<PokemonImpl> getPokemonById(@PathVariable("id") Integer pokemonId) {
+       PokemonImpl pokemonList = pokemonRepo.getById(pokemonId);
+
+//       if(pokemonList.isEmpty()) {
+//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//        }
+        System.out.println(pokemonList);
+        return new ResponseEntity<>(pokemonList, HttpStatus.OK);
     }
 
     @PostMapping("/pokemoninfo")

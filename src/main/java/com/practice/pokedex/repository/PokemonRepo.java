@@ -5,7 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface PokemonRepo extends JpaRepository<PokemonImpl, Long> {
+public interface PokemonRepo extends JpaRepository<PokemonImpl, Integer> {
     List<PokemonImpl> findBypokemonIndexNumber(Integer indexNumber);
     List<PokemonImpl> findBypokemonName(String pokemonName);
+
 }
