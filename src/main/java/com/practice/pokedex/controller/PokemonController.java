@@ -1,14 +1,12 @@
 package com.practice.pokedex.controller;
 
 import com.practice.pokedex.model.PokemonImpl;
-import com.practice.pokedex.repository.PokemonRepo;
 import com.practice.pokedex.service.PokemonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.Id;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:8080")
@@ -40,21 +38,31 @@ public class PokemonController {
         return new ResponseEntity<>(pokemonList, HttpStatus.OK);
     }
 
-    @PostMapping("/pokemoninfo")
+    @PostMapping("/pokemon/create")
     public ResponseEntity<PokemonImpl> createPokemon(@RequestBody PokemonImpl pokemonImpl) {
+        PokemonImpl pokemon = pokemonService.createPokemon(pokemonImpl);
+
+        //TODO possibly add handling for an erroneous input
+       if(pokemon == null) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(pokemon, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/pokemon/update/{id}")
+    public ResponseEntity<PokemonImpl> updatePokemon(@PathVariable("id") Integer id, @RequestBody PokemonImpl pokemonImpl) {
         return null;
     }
 
-    @PutMapping("/pokemoninfo/{id}")
-    public ResponseEntity<PokemonImpl> updatePokemon(@PathVariable("id") long id, @RequestBody PokemonImpl pokemonImpl) {
-        return null;
+    @DeleteMapping("/pokemon/delete/{id}")
+    public ResponseEntity<Integer> deletePokemonById(@PathVariable("id") Integer id) {
+        //error handling before delete
+
+        Integer deletePokemon = pokemonService.deletePokemonById(id);
+        return new ResponseEntity<>(deletePokemon, HttpStatus.OK);
     }
 
-    @DeleteMapping("/pokemoninfo/{id}")
-    public ResponseEntity<HttpStatus> deletePokemon(@PathVariable("id") long id) {
-        return null;
-    }
-
+    //I don't want to implement this for obvious resons.....
     @DeleteMapping("/pokemoninfo")
     public ResponseEntity<HttpStatus> deleteAllPokemon(){
         return null;

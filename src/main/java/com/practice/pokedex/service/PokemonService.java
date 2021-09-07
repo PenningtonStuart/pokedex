@@ -21,4 +21,11 @@ public class PokemonService {
         return pokemonRepo.getById(pokemonId);
     }
 
+    public PokemonImpl createPokemon(PokemonImpl pokemonImpl) {
+        return pokemonRepo.save(pokemonImpl);
+    }
+
+    public Integer deletePokemonById(Integer id) {
+        return pokemonRepo.deletePokemonById(id);
+    }
 }
